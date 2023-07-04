@@ -1,0 +1,18 @@
+# Rider files
+.idea/
+
+# Compiled output
+/bin/
+/obj/
+
+# Local application specific files
+App.config
+
+# NuGet packages
+/packages/
+
+# Visual Studio files
+.vs/
+
+# User-specific files
+*.userprefs
