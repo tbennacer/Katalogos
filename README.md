@@ -26,8 +26,8 @@ Before contributing, please refer to the contribution guide for best practices a
 
 ## License
 
-This repository is licensed under the [MIT License](LICENSE). Please refer to the license file for more information.
+This repository is intended for non-profit/learning purposes only. 
+It is not intended to facilitate or promote the creation of private Dofus servers, which is illegal and infringes upon Ankama's rights. 
+Please be aware of the legal restrictions regarding private Dofus servers.
 
-I hope this Katalogos repository facilitates Dofus emulation development by organizing C# projects, libraries, tools, documentation, and infrastructure components.
-
-Thank you for contributing to the success of Dofus emulation projects!
+Thank you for understanding and contributing to the success of Dofus emulation projects!
