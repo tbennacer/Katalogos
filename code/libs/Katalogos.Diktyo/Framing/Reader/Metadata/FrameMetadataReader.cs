@@ -1,9 +1,9 @@
 using System.Buffers;
 using Katalogos.Diktyo.Structure;
 
-namespace Katalogos.Diktyo.Framing.Reader;
+namespace Katalogos.Diktyo.Framing.Reader.Metadata;
 
-public class FrameMetadataReader
+public class FrameMetadataReader : IFrameMetadataReader
 {
     public bool TryRead(ref SequenceReader<byte> bufferReader, PacketOrigin origin, out FrameMetadata? metadata)
     {
