@@ -35,6 +35,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{B809B861-A
 		docs\libs\Diktyo.md = docs\libs\Diktyo.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Katalogos.Seiriopoiisi", "code\libs\Katalogos.Seiriopoiisi\Katalogos.Seiriopoiisi.csproj", "{5EDAF560-B359-4AE8-A976-FC5642AD3158}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,11 +54,16 @@ Global
 		{ABBD3959-B2F9-4B15-8B41-67D91AC18C02} = {CDA0E624-A0CA-4E37-92B3-768E722D931D}
 		{2A262308-7F4E-487A-A071-B000124AF8D4} = {0EF44CBA-571C-46F5-95A4-862C89AE45DA}
 		{B809B861-A73D-4E07-8527-CEA29B8EA24C} = {B4E46E9F-4F42-47CE-A490-CC114F5577CF}
+		{5EDAF560-B359-4AE8-A976-FC5642AD3158} = {0EF44CBA-571C-46F5-95A4-862C89AE45DA}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{2A262308-7F4E-487A-A071-B000124AF8D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2A262308-7F4E-487A-A071-B000124AF8D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A262308-7F4E-487A-A071-B000124AF8D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A262308-7F4E-487A-A071-B000124AF8D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EDAF560-B359-4AE8-A976-FC5642AD3158}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EDAF560-B359-4AE8-A976-FC5642AD3158}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EDAF560-B359-4AE8-A976-FC5642AD3158}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EDAF560-B359-4AE8-A976-FC5642AD3158}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
