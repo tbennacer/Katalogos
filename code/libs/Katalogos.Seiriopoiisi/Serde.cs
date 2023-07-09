@@ -14,7 +14,7 @@ public class Serde : ISerde
         Deserializer = deserializer;
     }
 
-    public Span<byte> Serialize<TInput>(TInput input)
+    public byte[] Serialize<TInput>(TInput input)
     {
         return Serializer.Serialize(input);
     }
