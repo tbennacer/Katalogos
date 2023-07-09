@@ -4,22 +4,23 @@ namespace Katalogos.Seiriopoiisi;
 
 public class Serde
 {
-    private readonly Serializer _serializer;
-    private readonly Deserializer _deserializer;
+    public Serializer Serializer { get; }
+
+    public Deserializer Deserializer { get; }
 
     public Serde(Serializer serializer, Deserializer deserializer)
     {
-        _serializer = serializer;
-        _deserializer = deserializer;
+        Serializer = serializer;
+        Deserializer = deserializer;
     }
 
     public Span<byte> Serialize<TInput>(TInput input)
     {
-        return _serializer.Serialize(input);
+        return Serializer.Serialize(input);
     }
 
     public bool TryDeserialize<TOutput>(in ReadOnlySequence<byte> buffer, out TOutput? output)
     {
-        return _deserializer.TryDeserialize(buffer, out output);
+        return Deserializer.TryDeserialize(buffer, out output);
     }
 }
