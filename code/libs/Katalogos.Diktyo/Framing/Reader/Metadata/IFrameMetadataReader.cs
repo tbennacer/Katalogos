@@ -5,5 +5,5 @@ namespace Katalogos.Diktyo.Framing.Reader.Metadata;
 
 public interface IFrameMetadataReader
 {
-    bool TryRead(ref SequenceReader<byte> bufferReader, PacketOrigin origin, out FrameMetadata? metadata);
+    bool TryRead(ref SequenceReader<byte> bufferReader, PacketSender sender, out FrameMetadata? metadata);
 }

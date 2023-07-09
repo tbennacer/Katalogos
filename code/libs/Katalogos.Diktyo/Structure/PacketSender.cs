@@ -1,6 +1,6 @@
 namespace Katalogos.Diktyo.Structure;
 
-public enum PacketOrigin
+public enum PacketSender
 {
     Client,
     Server

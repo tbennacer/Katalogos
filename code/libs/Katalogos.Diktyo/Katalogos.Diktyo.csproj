@@ -3,4 +3,10 @@
         <Folder Include="Behaviors\"/>
         <Folder Include="Distribution\"/>
     </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Katalogos.Seiriopoiisi\Katalogos.Seiriopoiisi.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="System.IO.Pipelines" Version="7.0.0"/>
+    </ItemGroup>
 </Project>

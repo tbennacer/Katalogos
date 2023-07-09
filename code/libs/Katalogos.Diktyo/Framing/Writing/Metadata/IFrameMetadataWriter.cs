@@ -4,5 +4,5 @@ namespace Katalogos.Diktyo.Framing.Writing.Metadata;
 
 public interface IFrameMetadataWriter
 {
-    bool TryWrite(Span<byte> buffer, FrameMetadata metadata, PacketOrigin origin);
+    bool TryWrite(Span<byte> buffer, FrameMetadata metadata, PacketSender sender);
 }
