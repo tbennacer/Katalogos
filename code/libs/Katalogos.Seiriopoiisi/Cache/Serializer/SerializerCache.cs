@@ -1,6 +1,6 @@
 ﻿namespace Katalogos.Seiriopoiisi.Cache.Serializer;
 
-public static class SerializerCache<TInput>
+internal static class SerializerCache<TInput>
 {
     private static SerializeDelegate<TInput>? _serialize;
 

@@ -1,10 +1,8 @@
 ﻿namespace Katalogos.Seiriopoiisi.Cache.Deserializer;
 
-public static class DeserializerCache<TOutput>
+internal static class DeserializerCache<TOutput>
 {
     private static TryDeserializeDelegate<TOutput>? _tryDeserialize;
-
-    public static 
 
     public static TryDeserializeDelegate<TOutput>? TryDeserialize
     {
