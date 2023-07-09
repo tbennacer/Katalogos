@@ -2,4 +2,4 @@
 
 namespace Katalogos.Seiriopoiisi.Cache.Deserializer;
 
-public delegate bool TryDeserializeDelegate<in TOutput>(ReadOnlySequence<byte> buffer, TOutput output);
+public delegate bool TryDeserializeDelegate<TOutput>(in ReadOnlySequence<byte> buffer, out TOutput output);

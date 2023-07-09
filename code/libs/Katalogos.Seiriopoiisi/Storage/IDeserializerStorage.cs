@@ -2,7 +2,7 @@
 
 namespace Katalogos.Seiriopoiisi.Storage;
 
-public interface IDeserializerStorage<in TOutput>
+public interface IDeserializerStorage<TOutput>
 {
     TryDeserializeDelegate<TOutput> TryDeserialize { get; }
 }

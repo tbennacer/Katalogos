@@ -4,7 +4,7 @@ internal static class SerializerCache<TInput>
 {
     private static SerializeDelegate<TInput>? _serialize;
 
-    public static SerializeDelegate<TInput>? Serialize
+    public static SerializeDelegate<TInput> Serialize
     {
         get
         {
@@ -12,6 +12,13 @@ internal static class SerializerCache<TInput>
                    throw new NotImplementedException(
                        $"Serializer {nameof(SerializerCache<TInput>)} isn't defined/cached");
         }
-        set { _serialize = value ?? throw new ArgumentNullException(nameof(value)); }
+        set
+        {
+            if (_serialize is not null)
+                throw new InvalidOperationException(
+                    $"Deserializer {nameof(SerializerCache<TInput>)} already cached/defined");
+
+            _serialize = value ?? throw new ArgumentNullException(nameof(value));
+        }
     }
 }

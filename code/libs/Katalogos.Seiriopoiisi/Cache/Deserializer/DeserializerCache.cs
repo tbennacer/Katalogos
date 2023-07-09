@@ -4,7 +4,7 @@ internal static class DeserializerCache<TOutput>
 {
     private static TryDeserializeDelegate<TOutput>? _tryDeserialize;
 
-    public static TryDeserializeDelegate<TOutput>? TryDeserialize
+    public static TryDeserializeDelegate<TOutput> TryDeserialize
     {
         get
         {
@@ -12,6 +12,13 @@ internal static class DeserializerCache<TOutput>
                    throw new NotImplementedException(
                        $"Deserializer {nameof(DeserializerCache<TOutput>)} isn't defined/cached");
         }
-        set { _tryDeserialize = value ?? throw new ArgumentNullException(nameof(value)); }
+        set
+        {
+            if (_tryDeserialize is not null)
+                throw new InvalidOperationException(
+                    $"Deserializer {nameof(DeserializerCache<TOutput>)} already cached/defined");
+
+            _tryDeserialize = value ?? throw new ArgumentNullException(nameof(value));
+        }
     }
 }
