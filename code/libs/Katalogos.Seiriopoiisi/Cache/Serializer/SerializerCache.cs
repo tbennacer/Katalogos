@@ -4,7 +4,7 @@ internal static class SerializerCache<TInput>
 {
     private static SerializeDelegate<TInput>? _serialize;
 
-    public static SerializeDelegate<TInput> Serialize
+    internal static SerializeDelegate<TInput> Serialize
     {
         get
         {

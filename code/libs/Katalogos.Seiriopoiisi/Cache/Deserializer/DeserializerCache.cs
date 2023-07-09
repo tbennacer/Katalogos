@@ -4,7 +4,7 @@ internal static class DeserializerCache<TOutput>
 {
     private static TryDeserializeDelegate<TOutput>? _tryDeserialize;
 
-    public static TryDeserializeDelegate<TOutput> TryDeserialize
+    internal static TryDeserializeDelegate<TOutput> TryDeserialize
     {
         get
         {
