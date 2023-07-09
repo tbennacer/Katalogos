@@ -2,7 +2,7 @@
 
 namespace Katalogos.Seiriopoiisi;
 
-public class Serializer
+public class Serializer : ISerializer
 {
     public Span<byte> Serialize<TInput>(TInput input)
     {

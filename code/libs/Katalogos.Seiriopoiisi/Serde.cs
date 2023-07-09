@@ -2,7 +2,7 @@
 
 namespace Katalogos.Seiriopoiisi;
 
-public class Serde
+public class Serde : ISerde
 {
     public Serializer Serializer { get; }
 
