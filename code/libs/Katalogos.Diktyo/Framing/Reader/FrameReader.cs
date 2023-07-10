@@ -6,6 +6,10 @@ using Katalogos.Diktyo.Structure;
 
 namespace Katalogos.Diktyo.Framing.Reader;
 
+file record FrameParsingResult(FrameMetadata metadata,
+    SequencePosition PayloadStartPosition,
+    SequencePosition FrameEnd);
+
 public class FrameReader : IFrameReader
 {
     private readonly IFrameMetadataReader _frameMetadataReader;
@@ -15,7 +19,9 @@ public class FrameReader : IFrameReader
         _frameMetadataReader = frameMetadataReader;
     }
 
-    public async ValueTask<Frame> ReadFrameAsync(PipeReader reader, CancellationToken cancellationToken)
+    public async ValueTask<Frame> ReadFrameAsync(PipeReader reader,
+        PacketSender sender,
+        CancellationToken cancellationToken)
     {
         Frame? frame = default;
         while (!cancellationToken.IsCancellationRequested)
@@ -25,12 +31,17 @@ public class FrameReader : IFrameReader
 
             SequencePosition consumed = buffer.Start;
 
-            bool frameFound = TryFindFrame(ref buffer, out FrameMetadata? metadata, out SequencePosition frameEnd);
+            bool found =
+                TryFindFrame(ref buffer, _frameMetadataReader, sender, out FrameParsingResult? parsingResult);
 
-            if (frameFound)
+            if (found)
             {
-                frame = new Frame(metadata!, buffer.Slice(consumed, frameEnd));
-                reader.AdvanceTo(consumed, frameEnd);
+                FrameMetadata metadata = parsingResult!.metadata;
+                ReadOnlySequence<byte> payload =
+                    buffer.Slice(parsingResult.PayloadStartPosition, parsingResult.FrameEnd);
+
+                frame = new Frame(metadata, payload);
+                reader.AdvanceTo(consumed, parsingResult.FrameEnd);
                 break;
             }
 
@@ -41,34 +52,39 @@ public class FrameReader : IFrameReader
             throw new InvalidDataException("Incomplete frame received before the end of the connection.");
         }
 
-        return frame!;
+        if (frame is null)
+            throw new OperationCanceledException("Cancellation requested during frame reading.");
+
+        return frame;
+
+        static bool TryFindFrame(ref ReadOnlySequence<byte> buffer,
+            IFrameMetadataReader frameMetadataReader,
+            PacketSender origin, out FrameParsingResult? parsingResult)
+        {
+            parsingResult = default;
+
+            SequenceReader<byte> bufferReader = new(buffer);
+            if (!frameMetadataReader.TryRead(ref bufferReader, origin, out FrameMetadata? metadata))
+                return false;
+
+            int frameLength = metadata!.PayloadLength;
+            if (frameLength > buffer.Length)
+                return false;
+
+            SequencePosition payloadStart = bufferReader.Position;
+
+            bufferReader.Advance(frameLength);
+            parsingResult = new FrameParsingResult(metadata!, payloadStart, bufferReader.Position);
+
+            return true;
+        }
     }
 
     public async IAsyncEnumerable<Frame> ReadFramesAsync(PipeReader reader,
+        PacketSender sender,
         [EnumeratorCancellation] CancellationToken cancellationToken)
     {
         while (!cancellationToken.IsCancellationRequested)
-            yield return await ReadFrameAsync(reader, cancellationToken).ConfigureAwait(false);
-    }
-
-    private bool TryFindFrame(ref ReadOnlySequence<byte> buffer,
-        out FrameMetadata? metadata,
-        out SequencePosition frameEnd)
-    {
-        metadata = default;
-        frameEnd = default;
-
-        SequenceReader<byte> bufferReader = new(buffer);
-        if (!_frameMetadataReader.TryRead(ref bufferReader, PacketSender.Server, out metadata))
-            return false;
-
-        int frameLength = metadata!.PayloadLength;
-        if (frameLength > buffer.Length)
-            return false;
-
-        bufferReader.Advance(frameLength);
-        frameEnd = bufferReader.Position;
-
-        return true;
+            yield return await ReadFrameAsync(reader, sender, cancellationToken).ConfigureAwait(false);
     }
 }
