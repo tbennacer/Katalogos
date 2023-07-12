@@ -1,12 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <ItemGroup>
-        <Folder Include="Behaviors\"/>
-        <Folder Include="Distribution\"/>
-    </ItemGroup>
-    <ItemGroup>
         <ProjectReference Include="..\Katalogos.Seiriopoiisi\Katalogos.Seiriopoiisi.csproj"/>
     </ItemGroup>
     <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Connections.Abstractions" Version="7.0.8"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0"/>
         <PackageReference Include="System.IO.Pipelines" Version="7.0.0"/>
     </ItemGroup>
 </Project>
